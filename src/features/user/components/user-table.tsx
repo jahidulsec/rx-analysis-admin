@@ -11,7 +11,7 @@ import {
   DropdownMenuTrigger,
   DropdownMenu,
 } from "@/components/ui/dropdown-menu";
-import { DEFAULT_PAGE_SIZE, users } from "@/lib/data";
+import { DEFAULT_PAGE_SIZE } from "@/lib/data";
 import { formatDate } from "@/lib/formatters";
 import { MutiResponseType } from "@/types/response";
 import { ColumnDef } from "@tanstack/react-table";
@@ -20,6 +20,7 @@ import React, { useState, useTransition } from "react";
 import { AlertModal } from "@/components/modal/alert";
 import { toast } from "sonner";
 import { Badge } from "@/components/ui/badge";
+import { User } from "@/types/user";
 // import AdminFormModal from "./form-modal";
 // import { deleteadmin } from "../actions/admin";
 // import { Admin } from "@/types/admin";
@@ -27,15 +28,13 @@ import { Badge } from "@/components/ui/badge";
 export default function UserTable({
   response,
 }: {
-  response: MutiResponseType<(typeof users)[number]>["data"];
+  response: MutiResponseType<User>["data"];
 }) {
-  const [edit, setEdit] = useState<
-    undefined | (typeof users)[number] | boolean
-  >(undefined);
+  const [edit, setEdit] = useState<undefined | User | boolean>(undefined);
   const [del, setDel] = useState<undefined | string | boolean>(undefined);
   const [isPending, startTransition] = useTransition();
 
-  const columns: ColumnDef<(typeof users)[number]>[] = [
+  const columns: ColumnDef<User>[] = [
     {
       header: "#",
       cell: ({ row, table }) => {

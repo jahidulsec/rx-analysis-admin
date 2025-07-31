@@ -1,34 +1,24 @@
-import { SearchForm } from "@/components/inputs/search";
+import { ErrorBoundary } from "@/components/boundary/error-boundary";
 import { Section } from "@/components/section/section";
-import { SectionHeading } from "@/components/typography/heading";
+import { TableSkeleton } from "@/components/skeleton/table";
 import { Button } from "@/components/ui/button";
+import HeaderSection from "@/features/user/components/header-section";
 import UserTable from "@/features/user/components/user-table";
-import { navlist, users } from "@/lib/data";
-import { Plus } from "lucide-react";
+import { getUsers } from "@/features/user/servers/user";
+import { SearchParams } from "@/types/search-params";
 import React, { Suspense } from "react";
 
 const roles = ["admin", "mio"];
 
-export default function UserPage() {
-  const data = navlist[1];
-
+export default async function UserPage({
+  searchParams,
+}: {
+  searchParams: SearchParams;
+}) {
   return (
     <Section>
       <div className="border rounded-md p-4 flex flex-col gap-4">
-        <div className="flex justify-between items-center gap-5 flex-wrap">
-          <SectionHeading>
-            <data.icon /> User
-          </SectionHeading>
-
-          <div className="flex items-center gap-3">
-            <Suspense>
-              <SearchForm />
-            </Suspense>
-            <Button variant={"outline"} className="border border-gradient">
-              <Plus className="text-primary" /> Add user
-            </Button>
-          </div>
-        </div>
+        <HeaderSection />
 
         <div className="flex items-center gap-3">
           {roles.map((item) => (
@@ -38,20 +28,25 @@ export default function UserPage() {
           ))}
         </div>
 
-        <UserTable
-          response={{
-            success: true,
-            message: "",
-            data: users,
-            pagination: {
-              total_items: 20,
-              total_page: 1,
-              current_page: 1,
-              per_page: 20,
-            },
-          }}
-        />
+        <Suspense fallback={<TableSkeleton />}>
+          <TableSection searchParams={searchParams} />
+        </Suspense>
       </div>
     </Section>
   );
 }
+
+const TableSection = async ({
+  searchParams,
+}: {
+  searchParams: SearchParams;
+}) => {
+  const params = await searchParams;
+  const response = await getUsers(params);
+
+  return (
+    <ErrorBoundary error={response.error}>
+      <UserTable response={response.data} />
+    </ErrorBoundary>
+  );
+};
