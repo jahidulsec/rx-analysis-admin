@@ -15,7 +15,7 @@ function HeaderSection({
     <section
       {...props}
       className={cn(
-        "flex items-center justify-between gap-3 flex-wrap",
+        "flex sm:items-center justify-between gap-3 flex-wrap  flex-col sm:flex-row",
         className
       )}
     />
@@ -29,10 +29,7 @@ function ActionSection({
   return (
     <section
       {...props}
-      className={cn(
-        "flex items-center gap-3 flex-wrap",
-        className
-      )}
+      className={cn("flex sm:items-center gap-3 flex-col sm:flex-row", className)}
     />
   );
 }

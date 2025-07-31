@@ -38,7 +38,7 @@ function Search({
   return (
     <form
       onSubmit={handleSubmit}
-      className="relative shrink max-w-[22rem] flex-1/2 sm:flex-none sm:max-w-xl min-w-[10rem]"
+      className="relative shrink flex-1/2 sm:flex-none sm:max-w-xl min-w-[10rem]"
     >
       <Input
         type={type}

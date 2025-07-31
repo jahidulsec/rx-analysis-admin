@@ -37,19 +37,21 @@ export default function AppNavbar() {
           <Logo />
         </div>
 
+        {/* desktop view */}
         <nav className="hidden lg:block">
           <ul className="flex items-center gap-3">
             {navlist.map((item) => (
               <li key={item.title}>
                 <Button
                   variant={"outline"}
+                  size={'sm'}
                   className={cn(
-                    "rounded-full shadow-none",
-                    pathname === item.url ? "border-primary bg-primary/5" : ""
+                    "rounded-full shadow-none text-xs font-medium",
+                    pathname === item.url ? "border-primary bg-primary/5 font-semibold" : ""
                   )}
                   asChild
                 >
-                  <Link href={item.url}>{item.title}</Link>
+                  <Link href={item.url}><item.icon className={`transition-all duration-300 fill-primary/40 text-primary/90 ${pathname === item.url ? "max-w-10" : "max-w-0"}`} /> {item.title}</Link>
                 </Button>
               </li>
             ))}
@@ -59,7 +61,7 @@ export default function AppNavbar() {
         <NavUser user={user} />
       </div>
 
-      {/* toggable sidebar */}
+      {/* toggable sidebar (mobile) */}
       <Sheet open={open} onOpenChange={setOpen}>
         <SheetContent side="left">
           <SheetHeader>
