@@ -1,37 +1,49 @@
+"use client";
+
 import React from "react";
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
-import { Separator } from "@/components/ui/separator";
-import { SidebarTrigger } from "@/components/ui/sidebar";
+import { NavUser } from "../dashboard/nav-user";
+import { Logo } from "../logo/logo";
+import { Button } from "../ui/button";
+import Link from "next/link";
+
+import { usePathname } from "next/navigation";
+import { cn } from "@/lib/utils";
+import { navlist } from "@/lib/data";
+
+const user = {
+  name: "radiant",
+  email: "m@radiant.com",
+  avatar: "/images/user.png",
+};
 
 export default function AppNavbar() {
+  const pathname = usePathname();
+
   return (
-    <header className="flex h-16 border-b shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12">
-      <div className="flex items-center gap-2 px-4">
-        <SidebarTrigger className="-ml-1" />
-        <Separator
-          orientation="vertical"
-          className="mr-2 data-[orientation=vertical]:h-4"
-        />
-        <Breadcrumb>
-          <BreadcrumbList>
-            <BreadcrumbItem className="hidden md:block">
-              <BreadcrumbLink href="#">
-                Dashboard
-              </BreadcrumbLink>
-            </BreadcrumbItem>
-            <BreadcrumbSeparator className="hidden md:block" />
-            <BreadcrumbItem>
-              <BreadcrumbPage>Data Fetching</BreadcrumbPage>
-            </BreadcrumbItem>
-          </BreadcrumbList>
-        </Breadcrumb>
+    <header className="flex h-16 shrink-0 items-center gap-2 mb-6">
+      <div className="container mx-auto px-4 flex justify-between items-center gap-5">
+        <Logo />
+
+        <nav>
+          <ul className="flex items-center gap-3">
+            {navlist.map((item) => (
+              <li key={item.title}>
+                <Button
+                  variant={"outline"}
+                  className={cn(
+                    "rounded-full shadow-none",
+                    pathname === item.url ? "border-primary bg-primary/5" : ""
+                  )}
+                  asChild
+                >
+                  <Link href={item.url}>{item.title}</Link>
+                </Button>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        <NavUser user={user} />
       </div>
     </header>
   );

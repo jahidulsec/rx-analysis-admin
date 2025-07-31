@@ -1,11 +1,11 @@
-import { Button } from '@/components/ui/button'
-import React from 'react'
+import React from "react";
 
 export default function HomePage() {
   return (
-    <div>HomePage
-
-      <Button>Login</Button>
+    <div>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis et
+      suscipit amet iusto tenetur, itaque porro id sit, nisi, cupiditate culpa?
+      Iste dicta eos architecto porro error voluptates, doloribus impedit.
     </div>
-  )
+  );
 }

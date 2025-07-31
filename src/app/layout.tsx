@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import ProgressProviders from "@/providers/progress-provider";
-
+import { Toaster } from "@/components/ui/sonner";
 
 export const metadata: Metadata = {
   title: "Dashboard - Radiant RX Analysis",
@@ -15,10 +15,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`font-inter antialiased`}
-      >
-        <ProgressProviders>{children}</ProgressProviders>
+      <body className={`font-inter antialiased`}>
+        <ProgressProviders>
+          {children} <Toaster />
+        </ProgressProviders>
       </body>
     </html>
   );

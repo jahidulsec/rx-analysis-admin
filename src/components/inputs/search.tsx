@@ -3,7 +3,7 @@
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { SearchIcon } from "lucide-react";
-import { useRouter } from "next-nprogress-bar";
+import { useRouter } from "@bprogress/next";
 import { usePathname, useSearchParams } from "next/navigation";
 import React, { FormEvent, useState } from "react";
 import { Button } from "../ui/button";
@@ -58,9 +58,10 @@ function Search({
       <Button
         type="submit"
         size={"icon"}
+        variant={'outline'}
         className="absolute right-0 top-0 rounded-l-none"
       >
-        <SearchIcon size={16} />
+        <SearchIcon className="text-primary" size={16} />
       </Button>
     </form>
   );
