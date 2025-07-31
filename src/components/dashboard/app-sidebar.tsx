@@ -3,13 +3,9 @@
 import * as React from "react";
 import {
   Book,
-  Frame,
   LandPlot,
   Loader,
-  Map,
-  PieChart,
   Pill,
-  SquareTerminal,
   Stethoscope,
   Users2,
 } from "lucide-react";
@@ -43,29 +39,29 @@ const data = {
   navMain: [
     {
       title: "User",
-      url: "#",
+      url: "/dashboard/user",
       icon: Users2,
     },
     {
       title: "Doctor",
-      url: "#",
+      url: "/dashboard/doctor",
       icon: Stethoscope,
     },
     {
       title: "Medicine",
-      url: "#",
+      url: "/dashboard/medicine",
       icon: Pill,
     },
     {
       title: "Territory",
-      url: "#",
+      url: "/dashboard/territory",
       icon: LandPlot,
     },
   ],
   projects: [
     {
       name: "Survey",
-      url: "#",
+      url: "/dashboard/survey",
       icon: Book,
     },
   ],
