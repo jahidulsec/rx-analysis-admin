@@ -20,20 +20,20 @@ import React, { useState, useTransition } from "react";
 import { AlertModal } from "@/components/modal/alert";
 import { toast } from "sonner";
 import { Badge } from "@/components/ui/badge";
-import { User } from "@/types/user";
 import UserFormModal from "./form-modal";
-import { deleteUser } from "../actions/user";
+import { deleteTerritory } from "../actions/territory";
+import { Territory } from "@/types/territory";
 
-export default function UserTable({
+export default function TerritoryTable({
   response,
 }: {
-  response: MutiResponseType<User>["data"];
+  response: MutiResponseType<Territory>["data"];
 }) {
-  const [edit, setEdit] = useState<undefined | User | boolean>(undefined);
+  const [edit, setEdit] = useState<undefined | Territory | boolean>(undefined);
   const [del, setDel] = useState<undefined | string | boolean>(undefined);
   const [isPending, startTransition] = useTransition();
 
-  const columns: ColumnDef<User>[] = [
+  const columns: ColumnDef<Territory>[] = [
     {
       header: "#",
       cell: ({ row, table }) => {
@@ -48,18 +48,20 @@ export default function UserTable({
       size: 20,
     },
     {
-      accessorKey: "username",
-      header: "Username",
+      accessorKey: "sapTerritoryId",
+      header: "SAP Territory ID",
     },
     {
-      accessorKey: "fullName",
-      header: "Full name",
+      accessorKey: "zone",
+      header: "Zone",
     },
-
     {
-      accessorKey: "role",
-      header: "Role",
-      cell: ({ row }) => <Badge variant={"outline"}>{row.original.role}</Badge>,
+      accessorKey: "region",
+      header: "Region",
+    },
+    {
+      accessorKey: "territory",
+      header: "Territory",
     },
     {
       header: "Created At",
@@ -91,7 +93,7 @@ export default function UserTable({
               <DropdownMenuSeparator />
               <DropdownMenuItem
                 variant="destructive"
-                onClick={() => setDel(row.original.id.toString())}
+                onClick={() => setDel(row.original.sapTerritoryId.toString())}
               >
                 Delete
               </DropdownMenuItem>
@@ -118,12 +120,12 @@ export default function UserTable({
       />
 
       {/* Edit modal */}
-      <UserFormModal
+      {/* <UserFormModal
         open={!!edit}
         onOpenChange={setEdit}
         title="Edit User"
         user={typeof edit !== "boolean" ? edit : undefined}
-      />
+      /> */}
 
       {/* delete modal */}
       <AlertModal
@@ -133,7 +135,7 @@ export default function UserTable({
         onAction={() => {
           startTransition(async () => {
             if (del && typeof del !== "boolean") {
-              const response = deleteUser(del);
+              const response = deleteTerritory(del);
               toast.promise(response, {
                 loading: "Loading...",
                 success: (data) => {

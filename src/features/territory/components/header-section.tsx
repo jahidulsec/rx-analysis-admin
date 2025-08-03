@@ -13,7 +13,7 @@ import React, { Suspense } from "react";
 import UserFormModal from "./form-modal";
 
 export default function HeaderSection() {
-  const title = "User";
+  const title = "Territory";
 
   const data = navlist.find((item) => item.title === title);
 
