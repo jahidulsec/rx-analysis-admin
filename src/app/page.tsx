@@ -1,11 +1,10 @@
-import React from "react";
+import { getAuthUser } from "@/lib/dal";
+import { redirect } from "next/navigation";
 
-export default function HomePage() {
-  return (
-    <div>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis et
-      suscipit amet iusto tenetur, itaque porro id sit, nisi, cupiditate culpa?
-      Iste dicta eos architecto porro error voluptates, doloribus impedit.
-    </div>
-  );
+export default async function HomePage() {
+  const authUser = await getAuthUser();
+
+  if (!authUser) redirect("/login");
+
+  return redirect("/dashboard");
 }

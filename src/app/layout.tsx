@@ -8,6 +8,8 @@ export const metadata: Metadata = {
   description: "A modern admin panel for data analysis",
 };
 
+export const dynamic = "force-dynamic";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -17,7 +19,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`font-inter antialiased`}>
         <ProgressProviders>
-          {children} <Toaster position="top-right" />
+          {children} <Toaster closeButton richColors theme="light" position="top-right" />
         </ProgressProviders>
       </body>
     </html>

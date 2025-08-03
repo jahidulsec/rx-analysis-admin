@@ -54,4 +54,5 @@ export async function createSession(token: string, user: AuthUser) {
 export async function deleteSession() {
   const cookie = await cookies();
   cookie.delete("refreshToken");
+  cookie.delete("session");
 }

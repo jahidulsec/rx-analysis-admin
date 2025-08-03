@@ -1,8 +1,7 @@
 "use server";
 
 import { cookies } from "next/headers";
-
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL;
+import { env } from "@/data/env/client";
 
 const fetchRefreshToken = async () => {
   const cookie = await cookies();
@@ -11,13 +10,18 @@ const fetchRefreshToken = async () => {
     // get refresh token
     const refreshToken = cookie.get("refreshToken")?.value;
 
-    const response = await fetch(`${API_BASE_URL}/api/auth/v1/token/revoke`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ refreshToken: refreshToken ?? "" }),
-    });
+    console.log("refreshToken ", refreshToken);
+
+    const response = await fetch(
+      `${env.NEXT_PUBLIC_API_URL}/api/auth/v1/token/revoke`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ refreshToken: refreshToken ?? "" }),
+      }
+    );
 
     const data = await response.json();
 
@@ -27,7 +31,6 @@ const fetchRefreshToken = async () => {
   } catch (error) {
     console.log((error as any).message);
 
-    cookie.delete("refreshToken");
     return null;
   }
 };
@@ -35,7 +38,7 @@ const fetchRefreshToken = async () => {
 export const fetchWithAuth = async (url: string, init?: RequestInit) => {
   let accessToken = "";
 
-  const response = await fetch(`${API_BASE_URL}${url}`, {
+  const response = await fetch(`${env.NEXT_PUBLIC_API_URL}${url}`, {
     ...init,
     headers: {
       ...init?.headers,
@@ -54,7 +57,7 @@ export const fetchWithAuth = async (url: string, init?: RequestInit) => {
     // set access token
     accessToken = newAccessToken;
 
-    return await fetch(`${API_BASE_URL}${url}`, {
+    return await fetch(`${env.NEXT_PUBLIC_API_URL}${url}`, {
       ...init,
       headers: {
         ...init?.headers,
