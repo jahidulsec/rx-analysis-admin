@@ -1,11 +1,12 @@
 "use server";
 
+import { env } from "@/data/env/client";
 import { cookies } from "next/headers";
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL;
+const API_BASE_URL = env.NEXT_PUBLIC_API_URL;
 
 const fetchRefreshToken = async () => {
-  const cookieStore = await cookies(); // no need for await here
+  const cookieStore = await cookies();
   const refreshToken = cookieStore.get("refreshToken")?.value;
 
   try {
