@@ -11,6 +11,7 @@ import { cn } from "@/lib/utils";
 import { navlist } from "@/lib/data";
 import { Menu } from "lucide-react";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "../ui/sheet";
+import { AuthUser } from "@/types/auth-user";
 
 const user = {
   name: "radiant",
@@ -18,7 +19,7 @@ const user = {
   avatar: "/images/user.png",
 };
 
-export default function AppNavbar() {
+export default function AppNavbar({ user }: { user: AuthUser }) {
   const pathname = usePathname();
   const [open, setOpen] = React.useState(false);
 
@@ -44,14 +45,23 @@ export default function AppNavbar() {
               <li key={item.title}>
                 <Button
                   variant={"outline"}
-                  size={'sm'}
+                  size={"sm"}
                   className={cn(
                     "rounded-full shadow-none text-xs font-medium",
-                    pathname === item.url ? "border-primary bg-primary/5 font-semibold" : ""
+                    pathname === item.url
+                      ? "border-primary bg-primary/5 font-semibold"
+                      : ""
                   )}
                   asChild
                 >
-                  <Link href={item.url}><item.icon className={`transition-all duration-300 fill-primary/40 text-primary/90 ${pathname === item.url ? "max-w-10" : "max-w-0"}`} /> {item.title}</Link>
+                  <Link href={item.url}>
+                    <item.icon
+                      className={`transition-all duration-300 fill-primary/40 text-primary/90 ${
+                        pathname === item.url ? "max-w-10" : "max-w-0"
+                      }`}
+                    />{" "}
+                    {item.title}
+                  </Link>
                 </Button>
               </li>
             ))}

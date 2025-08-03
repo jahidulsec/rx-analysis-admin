@@ -1,10 +1,18 @@
 import AppNavbar from "@/components/nav/app-nav";
+import { getAuthUser } from "@/lib/dal";
+import { redirect } from "next/navigation";
 import React from "react";
 
-export default function DashboardLayout({ children }: React.PropsWithChildren) {
+export default async function DashboardLayout({
+  children,
+}: React.PropsWithChildren) {
+  const authUser = await getAuthUser();
+
+  if (!authUser) redirect("/login");
+
   return (
     <div className="min-h-svh">
-      <AppNavbar />
+      <AppNavbar user={authUser} />
       <main className="bg-background relative flex w-full flex-1 flex-col gap-5 container mx-auto mb-6">
         {children}
       </main>

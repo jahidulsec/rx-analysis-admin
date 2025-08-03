@@ -17,7 +17,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`font-inter antialiased`}>
         <ProgressProviders>
-          {children} <Toaster />
+          {children} <Toaster position="top-right" />
         </ProgressProviders>
       </body>
     </html>
