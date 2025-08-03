@@ -73,9 +73,7 @@ export default function UserForm({
       <FormItem>
         <Label htmlFor="password">Password</Label>
         <PasswordInput
-          defaultValue={
-            (data?.values?.password as string) || user?.password || undefined
-          }
+          defaultValue={(data?.values?.password as string) || undefined}
           name="password"
           id="password"
           placeholder="Password"
@@ -88,7 +86,7 @@ export default function UserForm({
         <Select
           data={userRoles}
           defaultValue={
-            (data?.values?.password as string) || user?.password || undefined
+            (data?.values?.role as string) || user?.role || undefined
           }
           name="role"
           id="role"

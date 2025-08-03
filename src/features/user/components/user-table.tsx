@@ -21,9 +21,8 @@ import { AlertModal } from "@/components/modal/alert";
 import { toast } from "sonner";
 import { Badge } from "@/components/ui/badge";
 import { User } from "@/types/user";
-// import AdminFormModal from "./form-modal";
-// import { deleteadmin } from "../actions/admin";
-// import { Admin } from "@/types/admin";
+import UserFormModal from "./form-modal";
+import { deleteUser } from "../actions/user";
 
 export default function UserTable({
   response,
@@ -119,12 +118,12 @@ export default function UserTable({
       />
 
       {/* Edit modal */}
-      {/* <AdminFormModal
+      <UserFormModal
         open={!!edit}
         onOpenChange={setEdit}
         title="Edit Admin"
-        admin={typeof edit !== "boolean" ? edit : undefined}
-      /> */}
+        user={typeof edit !== "boolean" ? edit : undefined}
+      />
 
       {/* delete modal */}
       <AlertModal
@@ -133,19 +132,19 @@ export default function UserTable({
         onOpenChange={setDel}
         onAction={() => {
           startTransition(async () => {
-            // if (del && typeof del !== "boolean") {
-            //   const response = deleteadmin(del);
-            //   toast.promise(response, {
-            //     loading: "Loading...",
-            //     success: (data) => {
-            //       if (!data.data) throw data.error;
-            //       return data.data?.message;
-            //     },
-            //     error: (data) => {
-            //       return data.error;
-            //     },
-            //   });
-            // }
+            if (del && typeof del !== "boolean") {
+              const response = deleteUser(del);
+              toast.promise(response, {
+                loading: "Loading...",
+                success: (data) => {
+                  if (!data.data) throw data.error;
+                  return data.data?.message;
+                },
+                error: (data) => {
+                  return data.error;
+                },
+              });
+            }
           });
         }}
       />
