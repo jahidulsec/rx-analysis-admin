@@ -55,7 +55,7 @@ export default function TerritoryForm({
           }
           name="region"
           id="region"
-          placeholder="eg. johndoe"
+          placeholder="eg. Dhaka GEN-A-3"
           autoComplete="false"
         />
         {data?.error && <ErrorMessage message={data.error.region} />}
@@ -69,7 +69,7 @@ export default function TerritoryForm({
           }
           name="zone"
           id="zone"
-          placeholder="eg. johndoe"
+          placeholder="eg. Dhaka-I (GEN-A)"
           autoComplete="false"
         />
         {data?.error && <ErrorMessage message={data.error.zone} />}
@@ -85,7 +85,7 @@ export default function TerritoryForm({
           }
           name="territory"
           id="territory"
-          placeholder="eg. johndoe"
+          placeholder="eg. Mugda-1"
           autoComplete="false"
         />
         {data?.error && <ErrorMessage message={data.error.territory} />}

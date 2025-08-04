@@ -19,21 +19,21 @@ import { EllipsisVertical } from "lucide-react";
 import React, { useState, useTransition } from "react";
 import { AlertModal } from "@/components/modal/alert";
 import { toast } from "sonner";
-import { deleteMedicine } from "../actions/medicine";
-import MedicineFormModal from "./form-modal";
-import { Medicine } from "@/types/medicine";
+import { deleteDoctor } from "../actions/doctor";
+import TerritoryFormModal from "./form-modal";
 import { Badge } from "@/components/ui/badge";
+import { Doctor } from "@/types/doctor";
 
-export default function MedicineTable({
+export default function DoctorTable({
   response,
 }: {
-  response: MutiResponseType<Medicine>["data"];
+  response: MutiResponseType<Doctor>["data"];
 }) {
-  const [edit, setEdit] = useState<undefined | Medicine | boolean>(undefined);
+  const [edit, setEdit] = useState<undefined | Doctor | boolean>(undefined);
   const [del, setDel] = useState<undefined | string | boolean>(undefined);
   const [isPending, startTransition] = useTransition();
 
-  const columns: ColumnDef<Medicine>[] = [
+  const columns: ColumnDef<Doctor>[] = [
     {
       header: "#",
       cell: ({ row, table }) => {
@@ -48,13 +48,19 @@ export default function MedicineTable({
       size: 20,
     },
     {
-      accessorKey: "name",
-      header: "Medicine",
+      accessorKey: "fullName",
+      header: "Full name",
     },
     {
-      accessorKey: "type",
-      header: "Type",
-      cell: ({ row }) => <Badge variant={"outline"}>{row.original.type}</Badge>,
+      accessorKey: "designation",
+      header: "Designation",
+    },
+    {
+      accessorKey: "territoryId",
+      header: "Territory",
+      cell: ({ row }) => (
+        <Badge variant={"outline"}>{row.original.territoryId}</Badge>
+      ),
     },
 
     {
@@ -114,11 +120,11 @@ export default function MedicineTable({
       />
 
       {/* Edit modal */}
-      <MedicineFormModal
+      <TerritoryFormModal
         open={!!edit}
         onOpenChange={setEdit}
-        title="Edit Medicine"
-        medicine={typeof edit !== "boolean" ? edit : undefined}
+        title="Edit Doctor"
+        doctor={typeof edit !== "boolean" ? edit : undefined}
       />
 
       {/* delete modal */}
@@ -129,7 +135,7 @@ export default function MedicineTable({
         onAction={() => {
           startTransition(async () => {
             if (del && typeof del !== "boolean") {
-              const response = deleteMedicine(del);
+              const response = deleteDoctor(del);
               toast.promise(response, {
                 loading: "Loading...",
                 success: (data) => {

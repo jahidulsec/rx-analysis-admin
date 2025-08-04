@@ -10,8 +10,6 @@ const fetchRefreshToken = async () => {
     // get refresh token
     const refreshToken = cookie.get("refreshToken")?.value;
 
-    console.log("refreshToken ", refreshToken);
-
     const response = await fetch(
       `${env.NEXT_PUBLIC_API_URL}/api/auth/v1/token/revoke`,
       {
