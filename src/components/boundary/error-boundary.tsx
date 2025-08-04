@@ -12,7 +12,7 @@ const ErrorBoundary = ({
     if (error) {
       toast.error(error.message);
     }
-  }, [error]);
+  }, [error?.message]);
 
   return <>{children}</>;
 };
