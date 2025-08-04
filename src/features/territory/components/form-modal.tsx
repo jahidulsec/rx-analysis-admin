@@ -1,22 +1,22 @@
 import { Modal } from "@/components/modal/modal";
 import React from "react";
-import UserForm from "./user-form";
+import TerritoryForm from "./territory-form";
 import { DialogProps } from "@radix-ui/react-dialog";
-import { User } from "@/types/user";
+import { Territory } from "@/types/territory";
 
-export default function UserFormModal({
+export default function TerritoryFormModal({
   onOpenChange,
   title,
-  user,
+  territory,
   ...props
 }: React.ComponentProps<React.FC<DialogProps>> & {
   title: string;
-  user?: User;
+  territory?: Territory;
 }) {
   return (
     <Modal title={title} onOpenChange={onOpenChange} {...props}>
-      <UserForm
-        user={user}
+      <TerritoryForm
+        territory={territory}
         onClose={() => {
           if (onOpenChange) {
             onOpenChange(!open);

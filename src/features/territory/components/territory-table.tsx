@@ -19,10 +19,9 @@ import { EllipsisVertical } from "lucide-react";
 import React, { useState, useTransition } from "react";
 import { AlertModal } from "@/components/modal/alert";
 import { toast } from "sonner";
-import { Badge } from "@/components/ui/badge";
-import UserFormModal from "./form-modal";
 import { deleteTerritory } from "../actions/territory";
 import { Territory } from "@/types/territory";
+import TerritoryFormModal from "./form-modal";
 
 export default function TerritoryTable({
   response,
@@ -120,12 +119,12 @@ export default function TerritoryTable({
       />
 
       {/* Edit modal */}
-      {/* <UserFormModal
+      <TerritoryFormModal
         open={!!edit}
         onOpenChange={setEdit}
-        title="Edit User"
-        user={typeof edit !== "boolean" ? edit : undefined}
-      /> */}
+        title="Edit Territory"
+        territory={typeof edit !== "boolean" ? edit : undefined}
+      />
 
       {/* delete modal */}
       <AlertModal

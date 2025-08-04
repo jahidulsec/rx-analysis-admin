@@ -10,7 +10,7 @@ import { Button } from "@/components/ui/button";
 import { navlist } from "@/lib/data";
 import { Plus } from "lucide-react";
 import React, { Suspense } from "react";
-import UserFormModal from "./form-modal";
+import TerritoryFormModal from "./form-modal";
 
 export default function HeaderSection() {
   const title = "Territory";
@@ -39,7 +39,7 @@ export default function HeaderSection() {
       </Header>
 
       {/* modal */}
-      <UserFormModal title={`Add ${title}`} open={add} onOpenChange={setAdd} />
+      <TerritoryFormModal title={`Add ${title}`} open={add} onOpenChange={setAdd} />
     </>
   );
 }
