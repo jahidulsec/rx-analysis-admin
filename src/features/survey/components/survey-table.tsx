@@ -25,8 +25,10 @@ import Link from "next/link";
 
 export default function SurveyTable({
   response,
+  showPagination = true,
 }: {
   response: MutiResponseType<Survey>["data"];
+  showPagination?: boolean;
 }) {
   const [del, setDel] = useState<undefined | string | boolean>(undefined);
   const [isPending, startTransition] = useTransition();
@@ -122,14 +124,16 @@ export default function SurveyTable({
         <DataTable data={response?.data ?? []} columns={columns} />
       </TableWrapper>
 
-      <PagePagination
-        count={response?.data != null ? response.pagination.total_items : 0}
-        limit={
-          response?.data != null
-            ? response.pagination.per_page
-            : DEFAULT_PAGE_SIZE
-        }
-      />
+      {showPagination && (
+        <PagePagination
+          count={response?.data != null ? response.pagination.total_items : 0}
+          limit={
+            response?.data != null
+              ? response.pagination.per_page
+              : DEFAULT_PAGE_SIZE
+          }
+        />
+      )}
 
       {/* delete modal */}
       <AlertModal
