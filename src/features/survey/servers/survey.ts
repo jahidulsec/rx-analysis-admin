@@ -1,7 +1,7 @@
 "use server";
 
 import { fetchWithAuth } from "@/lib/api";
-import { Survey } from "@/types/survey";
+import { Survey, SurveyDetails } from "@/types/survey";
 import { APIError } from "@/types/errors";
 import { MutiResponseType, SingleResponseType } from "@/types/response";
 
@@ -39,7 +39,7 @@ export const getSurveys = async (
 
 export const getSurvey = async (
   id: string
-): Promise<SingleResponseType<Survey>> => {
+): Promise<SingleResponseType<SurveyDetails>> => {
   try {
     const response = await fetchWithAuth(`/api/survey/v1/survey/${id}`, {
       next: {

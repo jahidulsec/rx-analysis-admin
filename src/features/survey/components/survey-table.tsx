@@ -21,6 +21,7 @@ import { AlertModal } from "@/components/modal/alert";
 import { toast } from "sonner";
 import { Survey } from "@/types/survey";
 import { deleteSurvey } from "../actions/survey";
+import Link from "next/link";
 
 export default function SurveyTable({
   response,
@@ -98,7 +99,9 @@ export default function SurveyTable({
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-32">
-              <DropdownMenuItem>Edit</DropdownMenuItem>
+              <DropdownMenuItem asChild>
+                <Link href={`/dashboard/survey/${row.original.id}`}>View</Link>
+              </DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem
                 variant="destructive"

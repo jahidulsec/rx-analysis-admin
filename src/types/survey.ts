@@ -1,3 +1,5 @@
+import { SurveyMedicine } from "./survey-medicine";
+
 export interface Survey {
   id: string;
   doctorId: string;
@@ -8,4 +10,8 @@ export interface Survey {
   createdBy: string;
   surveyorName: string;
   createdAt: string;
+}
+
+export interface SurveyDetails extends Survey {
+  medicines: SurveyMedicine[];
 }

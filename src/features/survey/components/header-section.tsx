@@ -21,7 +21,7 @@ export default function HeaderSection() {
 
         <ActionSection>
           <Suspense>
-            <SearchForm />
+            <SearchForm placeholder="Search (name, mobile, id)" />
           </Suspense>
         </ActionSection>
       </Header>
