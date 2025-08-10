@@ -9,7 +9,7 @@ const Card = ({
   item,
   ...props
 }: React.ComponentProps<"article"> & {
-  item: { value: number; icon: LucideIcon };
+  item: { value: number | string; icon: LucideIcon };
 }) => {
   return (
     <article
@@ -22,7 +22,9 @@ const Card = ({
           <item.icon className="size-3.5 text-primary fill-primary/40" />
         </div>
       </div>
-      <h4 className="font-bold text-2xl">{formatNumber(item.value)}</h4>
+      <h4 className="font-bold text-2xl">
+        {typeof item.value === "number" ? formatNumber(item.value) : item.value}
+      </h4>
     </article>
   );
 };
