@@ -1,5 +1,8 @@
 import { LoginForm } from "@/features/login/components/login-form";
 import { Logo } from "@/components/logo/logo";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import Footer from "@/components/footer/footer";
 
 export default function LoginPage() {
   return (
@@ -10,6 +13,7 @@ export default function LoginPage() {
         </div>
         <LoginForm />
       </div>
+      <Footer />
     </div>
   );
 }
